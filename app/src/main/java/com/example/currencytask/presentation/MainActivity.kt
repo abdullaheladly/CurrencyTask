@@ -1,7 +1,8 @@
-package com.example.currencytask
+package com.example.currencytask.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.currencytask.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
