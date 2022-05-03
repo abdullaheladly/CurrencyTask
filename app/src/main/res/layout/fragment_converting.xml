@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.convertingfragment.ConvertingFragment">
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/fromSpinner"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/switchFromAndTo"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_30sdp"
+        />
+    <ImageButton
+        android:id="@+id/switchFromAndTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/fromSpinner"
+        app:layout_constraintTop_toTopOf="@id/fromSpinner"
+        app:layout_constraintBottom_toBottomOf="@id/fromSpinner"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:src="@drawable/ic_swap"/>
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/toSpinner"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/switchFromAndTo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/_100sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        />
+
+    <EditText
+        android:id="@+id/edtFrom"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/fromSpinner"
+        app:layout_constraintEnd_toEndOf="@id/fromSpinner"
+        app:layout_constraintTop_toBottomOf="@id/fromSpinner"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:inputType="numberDecimal"
+        android:text="1"
+        android:hint="from"
+        android:textAlignment="center"
+        android:autofillHints="from" />
+
+    <EditText
+        android:id="@+id/edtTo"
+        android:layout_width="@dimen/_75sdp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/toSpinner"
+        app:layout_constraintEnd_toEndOf="@id/toSpinner"
+        app:layout_constraintTop_toBottomOf="@id/toSpinner"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:hint="to"
+        android:autofillHints="to" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edtFrom"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:text="Details"
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
