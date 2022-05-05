@@ -132,18 +132,35 @@ class ConvertingFragment : Fragment() {
             if (prop.name.toUpperCase()==to&&binding.fromSpinner.selectedItem=="EUR"&&binding.edtFrom.text.toString()=="1"){
                 toCurrency= prop.get(rates) as Double
                 binding.edtTo.setText(toCurrency.toString())
+                break
             }else if (prop.name.toUpperCase()==to&&binding.fromSpinner.selectedItem=="EUR"&&!binding.edtFrom.text.isNullOrEmpty()){
                 toCurrency= prop.get(rates) as Double
                 val newValue=toCurrency*binding.edtFrom.text.toString().toInt()
                 binding.edtTo.setText(newValue.toString())
+                break
             }else{
                 if (prop.name.toUpperCase()==from){
                     fromCurrency= prop.get(rates) as Double
                 }
+
+                if (prop.name.toUpperCase()==to){
+                    toCurrency= prop.get(rates) as Double
+                }
+
+            }
+        }
+        if (fromCurrency!=0.0&&toCurrency!=0.0&&!binding.edtFrom.text.isNullOrEmpty()){
+            var value=toCurrency/fromCurrency
+            if (binding.edtFrom.text.toString()=="1") {
+                binding.edtTo.setText(value.toString())
+            }else{
+                value*=binding.edtFrom.text.toString().toInt()
+                binding.edtTo.setText(value.toString())
             }
 
-
         }
+
+
     }
 
 
