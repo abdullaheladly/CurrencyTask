@@ -56,6 +56,7 @@ class ConvertingFragment : Fragment() {
                     rates= it.data?.ratesDto?.toRates()!!
                     setSpinners()
                     setListeners()
+
                 }
                 ApiStatus.ERROR -> {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -69,6 +70,15 @@ class ConvertingFragment : Fragment() {
     }
 
     private fun setListeners() {
+
+        binding.switchFromAndTo.setOnClickListener {
+           val fromPosition= binding.fromSpinner.selectedItemPosition
+           val toPosition= binding.toSpinner.selectedItemPosition
+            binding.fromSpinner.setSelection(toPosition)
+            binding.toSpinner.setSelection(fromPosition)
+
+        }
+
         binding.edtFrom.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
