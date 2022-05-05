@@ -1,4 +1,4 @@
-package com.example.currencytask.presentation
+package com.example.currencytask.presentation.details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.currencytask.R
 import com.example.currencytask.databinding.FragmentDetailsBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
     private var _binding:FragmentDetailsBinding?=null
     private val binding get() = _binding!!

@@ -16,28 +16,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var   viewModel: TestViewModel
 
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        viewModel=ViewModelProvider(this).get(TestViewModel::class.java)
-        viewModel.getData().observe(this) {
-            when (it.status) {
-                ApiStatus.SUCCESS -> {
 
-                    Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
-                }
-                ApiStatus.ERROR -> {
-                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
-
-                }
-                ApiStatus.LOADING -> {
-
-                }
-            }
-        }
     }
 }

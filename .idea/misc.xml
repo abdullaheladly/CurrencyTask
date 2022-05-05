@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mosta/StudioProjects/CurrencyTask/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/mosta/StudioProjects/CurrencyTask/app/src/main/res/layout/currency_item_row.xml" value="0.18" />
         <entry key="..\:/Users/mosta/StudioProjects/CurrencyTask/app/src/main/res/layout/fragment_converting.xml" value="0.18" />
         <entry key="..\:/Users/mosta/StudioProjects/CurrencyTask/app/src/main/res/layout/fragment_details.xml" value="0.22" />
       </map>
