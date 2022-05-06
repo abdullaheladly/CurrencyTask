@@ -8,12 +8,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.currencytask.data.mapper.toRates
 import com.example.currencytask.databinding.FragmentDetailsBinding
+import com.example.currencytask.presentation.convertingfragment.CurrenciesAdapter
+import com.example.currencytask.domain.model.CustomRateClass
 import com.example.currencytask.domain.model.Rates
 import com.example.currencytask.util.ApiStatus
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.reflect.full.memberProperties
 
 
@@ -24,6 +28,9 @@ class DetailsFragment : Fragment() {
 
     private val binding get() = _binding!!
     private val args by navArgs<DetailsFragmentArgs>()
+    private  val currencies:ArrayList<CustomRateClass> =ArrayList()
+    private val currenciesAdapter by lazy { CurrenciesAdapter() }
+
     private lateinit var fromCurrencyKey:String
     private lateinit var toCurrencyKey:String
     private lateinit var rates:Rates
@@ -43,14 +50,50 @@ class DetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding= FragmentDetailsBinding.inflate(layoutInflater,container,false)
         viewModel= ViewModelProvider(this).get(HistoryViewModel::class.java)
-
         getPassedArguments()
+        getOtherCurrencies()
+        setupRecycleView()
         getCurrentDate()
         getYesterdayValues()
         getTheDayBeforeValues()
         getEarlierValues()
         return binding.root
     }
+
+    private fun setupRecycleView() {
+        binding.rvAllCurrencies.adapter=currenciesAdapter
+        binding.rvAllCurrencies.layoutManager= LinearLayoutManager(requireContext())
+    }
+
+    private fun getOtherCurrencies() {
+        var fromCurrency = 0.0
+        var toCurrency = 0.0
+
+        if (fromCurrencyKey == "EUR") {
+            for (prop in Rates::class.memberProperties) {
+                val customRateClass =
+                    CustomRateClass(prop.name.toUpperCase(), prop.get(rates).toString())
+                currencies.add(customRateClass)
+            }
+        } else {
+            for (prop in Rates::class.memberProperties) {
+                if (prop.name.toUpperCase() == fromCurrencyKey) {
+                    fromCurrency = prop.get(rates) as Double
+                    break
+                }
+            }
+            for (prop in Rates::class.memberProperties) {
+                val customRateClass = CustomRateClass(null, null)
+                customRateClass.key=prop.name
+                toCurrency = prop.get(rates) as Double
+                var value = toCurrency / fromCurrency
+                customRateClass.value=value.toString()
+                currencies.add(customRateClass)
+            }
+        }
+
+    }
+
 
     private fun getEarlierValues() {
         viewModel.getData(earlierDate).observe(requireActivity()) {

@@ -1,6 +1,6 @@
 package com.example.currencytask.domain.model
 
 data class CustomRateClass(
-    val key: String?,
-    val value: Double?,
+    var key: String?,
+    var value: String?,
 )
