@@ -11,19 +11,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.currencytask.R
 import com.example.currencytask.data.mapper.toRates
 import com.example.currencytask.databinding.FragmentConvertingBinding
 import com.example.currencytask.domain.model.Rates
-import com.example.currencytask.presentation.TestViewModel
 import com.example.currencytask.util.ApiStatus
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlin.reflect.full.memberProperties
 
 
 @AndroidEntryPoint
 class ConvertingFragment : Fragment() {
-    private lateinit var   viewModel: TestViewModel
+    private lateinit var   viewModel: ConvertingViewModel
     private var _binding:FragmentConvertingBinding?=null
     private val binding get() = _binding!!
     private lateinit var rates: Rates
@@ -35,16 +35,9 @@ class ConvertingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        viewModel= ViewModelProvider(this).get(TestViewModel::class.java)
-
-
+        viewModel= ViewModelProvider(this).get(ConvertingViewModel::class.java)
         _binding= FragmentConvertingBinding.inflate(layoutInflater,container,false)
         getData()
-
-
-
-
-
 
         return binding.root
     }
@@ -70,6 +63,10 @@ class ConvertingFragment : Fragment() {
     }
 
     private fun setListeners() {
+        binding.goToDetails.setOnClickListener {
+            val action=ConvertingFragmentDirections.actionConvertingFragmentToDetailsFragment(fromCurrencyKEY,toCurrencyKEY,rates)
+            findNavController().navigate(action)
+        }
 
         binding.switchFromAndTo.setOnClickListener {
            val fromPosition= binding.fromSpinner.selectedItemPosition

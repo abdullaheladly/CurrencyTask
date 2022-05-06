@@ -20,7 +20,6 @@ import java.lang.Exception
 open class BaseViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun <T> handleFlowResponse(requst:suspend () -> Response<T>)=
         try {
             flow<ApiResult<T>> {
@@ -84,7 +83,6 @@ open class BaseViewModel(application: Application) : AndroidViewModel(applicatio
 
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
     private fun hasInternetConnection():Boolean{
         val connectivityManager=getApplication<Application>().getSystemService(
             Context.CONNECTIVITY_SERVICE

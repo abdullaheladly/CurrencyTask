@@ -1,4 +1,4 @@
-package com.example.currencytask.presentation
+package com.example.currencytask.presentation.convertingfragment
 
 import android.app.Application
 import android.os.Build
@@ -11,11 +11,10 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class TestViewModel @Inject constructor(
+class ConvertingViewModel @Inject constructor(
     private val currencyRepo: CurrencyRepoImpl,
     application: Application
 ) :BaseViewModel(application) {
-    @RequiresApi(Build.VERSION_CODES.M)
     fun getData()=handleFlowResponse {
         currencyRepo.getCurrencyData()
     }

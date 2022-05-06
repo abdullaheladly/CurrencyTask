@@ -18,5 +18,15 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.currencytask.presentation.details.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="from"
+            app:argType="string" />
+        <argument
+            android:name="to"
+            app:argType="string" />
+        <argument
+            android:name="rates"
+            app:argType="com.example.currencytask.domain.model.Rates" />
+    </fragment>
 </navigation>

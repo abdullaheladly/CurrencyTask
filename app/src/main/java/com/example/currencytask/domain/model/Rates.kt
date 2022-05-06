@@ -1,5 +1,7 @@
 package com.example.currencytask.domain.model
 
+import java.io.Serializable
+
 data class Rates(
 
     val aED: Double?,
@@ -170,4 +172,4 @@ data class Rates(
     val zMK: Double?,
     val zMW: Double?,
     val zWL: Double?
-)
+):Serializable
