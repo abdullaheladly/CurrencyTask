@@ -1,7 +1,6 @@
 package com.example.currencytask.domain.model
 
 
-import com.google.gson.annotations.SerializedName
 
 data class ChangeCurrencyResponse(
 

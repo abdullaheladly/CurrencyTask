@@ -99,8 +99,14 @@ class DetailsFragment : Fragment() {
         viewModel.getData(earlierDate).observe(requireActivity()) {
             when (it.status) {
                 ApiStatus.SUCCESS -> {
-                    earlierRates= it.data?.ratesDto?.toRates()!!
-                    setEarlierValue(earlierRates)
+                    if (it.data?.success == true){
+                    earlierRates= it.data.ratesDto?.toRates()!!
+                    setEarlierValue(earlierRates)}else
+                    {
+                        Toast.makeText(requireContext(), it.data?.error?.info, Toast.LENGTH_SHORT).show()
+
+                    }
+
                 }
                 ApiStatus.ERROR -> {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -117,8 +123,15 @@ class DetailsFragment : Fragment() {
         viewModel.getData(theDayBeforeDate).observe(requireActivity()) {
             when (it.status) {
                 ApiStatus.SUCCESS -> {
-                    theDayBeforeRates= it.data?.ratesDto?.toRates()!!
-                    setTheDayBeforeValue(theDayBeforeRates)
+                    if (it.data?.success == true){
+                        theDayBeforeRates= it.data?.ratesDto?.toRates()!!
+                    setTheDayBeforeValue(theDayBeforeRates)}
+                    else
+                    {
+                        Toast.makeText(requireContext(), it.data?.error?.info, Toast.LENGTH_SHORT).show()
+
+                    }
+
                 }
                 ApiStatus.ERROR -> {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()
@@ -135,8 +148,16 @@ class DetailsFragment : Fragment() {
         viewModel.getData(yesterdayDate).observe(requireActivity()) {
             when (it.status) {
                 ApiStatus.SUCCESS -> {
-                    yesterdayRates= it.data?.ratesDto?.toRates()!!
-                    setYesterdayValue(yesterdayRates)
+                    if (it.data?.success == true){
+
+                        yesterdayRates= it.data?.ratesDto?.toRates()!!
+                    setYesterdayValue(yesterdayRates)}
+                    else
+                    {
+                        Toast.makeText(requireContext(), it.data?.error?.info, Toast.LENGTH_SHORT).show()
+
+                    }
+
                 }
                 ApiStatus.ERROR -> {
                     Toast.makeText(requireContext(), it.message.toString(), Toast.LENGTH_SHORT).show()

@@ -46,9 +46,18 @@ class ConvertingFragment : Fragment() {
         viewModel.getData().observe(requireActivity()) {
             when (it.status) {
                 ApiStatus.SUCCESS -> {
+                    if (it.data?.success==true){
+                        binding.errorMessage.visibility=View.GONE
                     rates= it.data?.ratesDto?.toRates()!!
                     setSpinners()
-                    setListeners()
+                    setListeners()}
+                    else
+                    {
+                        binding.errorMessage.visibility=View.VISIBLE
+                        binding.errorMessage.text= it.data?.error?.info
+                        Toast.makeText(requireContext(), it.data?.error?.info, Toast.LENGTH_SHORT).show()
+
+                    }
 
                 }
                 ApiStatus.ERROR -> {
